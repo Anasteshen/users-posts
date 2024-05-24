@@ -15,6 +15,16 @@ To see the list of environment variables go [Environment variables](#Environment
 $ touch .env
 ```
 
+or
+
+```bash
+$ cp .env.dist .env
+```
+
+## TODO!
+
+### Describe all env related to auth0 and add step-by-step instructions for personal configuration
+
 ## Running the app
 
 ###### `note` Before running the app, ensure that Docker, npm, and Node.js are pre-installed.

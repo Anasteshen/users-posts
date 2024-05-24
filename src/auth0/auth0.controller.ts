@@ -1,13 +1,4 @@
-import { Request } from 'express';
-import {
-  Body,
-  Controller,
-  HttpException,
-  Post,
-  Req,
-  UseGuards,
-} from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Body, Controller, HttpException, Post } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -78,14 +69,6 @@ export class AuthController {
     }
 
     return response.data;
-  }
-
-  @Post('ping')
-  @UseGuards(AuthGuard('jwt'))
-  async sign(@Req() req: Request) {
-    console.log('ping', req.user);
-
-    return { status: 'OK' };
   }
 
   // TODO: Implement the `logout` endpoint
