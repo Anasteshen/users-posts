@@ -1,0 +1,113 @@
+@baseUrl = http://localhost:{{$dotenv APP_PORT}}
+@clientSecret = {{$dotenv AUTH0_CLIENT_SECRET}}
+@clientId = {{$dotenv AUTH0_CLIENT_ID}}
+@audience = {{$dotenv AUTH0_AUDIENCE}}
+@issuerUrl = {{$dotenv AUTH0_ISSUER_URL}}
+@domain = {{$dotenv AUTH0_DOMAIN}}
+@connections = {{$dotenv AUTH0_CONNECTIONS}}
+
+@email="test111@gmail.com"
+@password="Anasteshen2000@"
+
+# @name signup
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+    "email": "test@gmail.com",
+    "password": "Str0ngPassword!"
+}
+
+###
+
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "test111@gmail.com",
+    "password": "Anasteshen2000@"
+}
+
+###
+
+@accessToken = {{login.response.body.$.access_token}}
+
+# @name ping
+POST {{baseUrl}}/auth/ping
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "content": "fake content"
+}
+
+
+###
+
+# @name create_post
+POST {{baseUrl}}/posts
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "title": "2",
+    "description": "Anasteshen2000@",
+    "tags": ["1"]
+}
+
+###
+
+# @name update_post
+PUT {{baseUrl}}/posts/{{postID}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "title": "2",
+    "description": "Anasteshen2000@",
+    "tags": ["1", "2"]
+}
+
+###
+
+@postID = 3
+# @name get_post
+GET {{baseUrl}}/posts/{{postID}}
+# Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+
+###
+
+# @name all_posts
+GET {{baseUrl}}/posts?tags[]=1
+# Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+
+###
+
+@userUuid = 9937620f-a0d5-4760-aac6-ae3e65ddce80
+# @name my_posts
+GET {{baseUrl}}/posts?userUuid={{userUuid}}
+# Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+
+###
+
+# @name login
+# POST {{issuerUrl}}/oauth/token
+# Content-Type: application/x-www-form-urlencoded
+
+# grant_type=password&username={{email}}&password={{password}}&audience={{audience}}&scope=read%3Asample&client_id={{clientId}}&client_secret={{clientSecret}}
+
+
+###
+
+# # @name refresh_token
+# POST {{issuerUrl}}/oauth/token
+# Content-Type: application/x-www-form-urlencoded
+
+# grant_type=refresh_token&client_id={{clientId}}&client_secret={{clientSecret}}&refresh_token={{accessToken}}
