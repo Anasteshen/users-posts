@@ -8,7 +8,7 @@ To install all necessary dependencies
 $ npm install
 ```
 
-Create .env file and fill it with Environment variables
+Create .env file and fill it with Environment variables.
 To see the list of environment variables go [Environment variables](#Environment-variables)
 
 ```bash
@@ -22,8 +22,6 @@ $ touch .env
 ```bash
 $ make start
 ```
-
-## Running the migrations
 
 ## Environment variables
 
